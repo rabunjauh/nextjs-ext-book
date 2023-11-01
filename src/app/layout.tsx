@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import "./globals.css";
 import type { Metadata } from "next";
 
@@ -13,7 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#F4F6F9] h-full w-screen mb-56">{children}</body>
+      <body>
+        <div className="bg-[#F4F6F9] h-full w-screen mb-56">{children}</div>
+        <Footer />
+      </body>
     </html>
   );
 }

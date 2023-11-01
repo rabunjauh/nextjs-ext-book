@@ -1,3 +1,5 @@
+import Nav from "@/components/Nav";
+
 export default function adminPageLayout({
   children,
 }: {
@@ -5,6 +7,7 @@ export default function adminPageLayout({
 }) {
   return (
     <div>
+      <Nav />
       <section>{children}</section>
     </div>
   );
