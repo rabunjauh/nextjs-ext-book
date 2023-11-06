@@ -9,6 +9,7 @@ async function getData(): Promise<Group[]> {
 
   const resData = await res.json();
 
+  // get array 'data' from resData
   const data = resData.data || [];
 
   return data;
