@@ -29,6 +29,7 @@ interface DataTableProps<TData, TValue> {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import DeleteGroup from "@/components/group/DeleteGroup";
 
 export function DataTable<TData, TValue>({
   columns,
@@ -180,31 +181,7 @@ export function DataTable<TData, TValue>({
         </Button>
       </div>
       {table.getFilteredSelectedRowModel().rows.length > 0 ? (
-        <Button
-          variant="outline"
-          onClick={async () => {
-            const selectedRows = table.getFilteredSelectedRowModel().rows;
-            const deleteData: number[] = [];
-            selectedRows.map((row) => {
-              deleteData.push(row.original.id);
-            });
-            console.log(deleteData);
-            const res = await fetch(
-              "http://localhost:3000/multipleDeleteGroup",
-              {
-                method: "DELETE",
-                body: JSON.stringify({
-                  id: deleteData,
-                }),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-          }}
-        >
-          Delete Selected
-        </Button>
+        <DeleteGroup table={table} />
       ) : null}
     </div>
   );

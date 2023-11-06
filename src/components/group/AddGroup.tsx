@@ -3,13 +3,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, useFieldArray, Control, useWatch } from "react-hook-form";
 // import Button from "@/components/Button";
-import MessageAlert from "@/components/MessageAlert";
 import { Button } from "@/components/ui/button";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AddGroup() {
   const [modal, setModal] = useState(false);
-  const [message, setMessage] = useState("");
-  const [alert, setAlert] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -38,17 +37,13 @@ export default function AddGroup() {
     });
   };
 
-  const closeAlert = () => {
-    setAlert(false);
-  };
-
   const submit = async (data) => {
     try {
       const createGroups = await postGroup(data);
-      setAlert(true);
-      setMessage(createGroups);
+      toast.success(createGroups);
     } catch (error) {
       console.log(error);
+      toast.error("There is something wrong, added data failed");
     }
     router.refresh();
     setModal(false);
@@ -75,9 +70,7 @@ export default function AddGroup() {
 
   return (
     <div>
-      {alert ? (
-        <MessageAlert messageValue={message} onClick={closeAlert} />
-      ) : null}
+      <ToastContainer />
 
       <Button variant="outline" size="sm" onClick={toggle}>
         Add Group

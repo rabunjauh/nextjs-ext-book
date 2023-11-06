@@ -2,10 +2,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-// import Button from "@/components/Button";
-import MessageAlert from "@/components/MessageAlert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type FormValues = {
   description: string;
@@ -13,8 +13,6 @@ type FormValues = {
 
 export default function EditGroup(id) {
   const [modal, setModal] = useState(false);
-  const [message, setMessage] = useState("");
-  const [alert, setAlert] = useState(false);
   const router = useRouter();
 
   const openModal = async () => {
@@ -46,17 +44,13 @@ export default function EditGroup(id) {
     },
   });
 
-  const closeAlert = () => {
-    setAlert(false);
-  };
-
   const submit = async (data) => {
     try {
       const createGroups = await postGroup(data);
-      setAlert(true);
-      setMessage(createGroups);
+      toast.success(createGroups);
     } catch (error) {
       console.log(error);
+      toast.error("There is something wrong, added data failed");
     }
     router.refresh();
     setModal(false);
@@ -83,9 +77,7 @@ export default function EditGroup(id) {
 
   return (
     <div>
-      {alert ? (
-        <MessageAlert messageValue={message} onClick={closeAlert} />
-      ) : null}
+      <ToastContainer />
 
       <Button variant="outline" size="sm" onClick={openModal}>
         Edit
