@@ -1,8 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm, useFieldArray, Control, useWatch } from "react-hook-form";
-// import Button from "@/components/Button";
+import { useForm, useFieldArray, FieldValues } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,7 +36,7 @@ export default function AddGroup() {
     });
   };
 
-  const submit = async (data) => {
+  const submit = async (data: FieldValues) => {
     try {
       const createGroups = await postGroup(data);
       toast.success(createGroups);
@@ -49,7 +48,7 @@ export default function AddGroup() {
     setModal(false);
   };
 
-  const postGroup = (data) => {
+  const postGroup = (data: FieldValues) => {
     return fetch("http://localhost:3000/group", {
       method: "POST",
       body: JSON.stringify(data.group),
@@ -75,6 +74,7 @@ export default function AddGroup() {
       <Button variant="outline" size="sm" onClick={toggle}>
         Add Group
       </Button>
+      <hr className="mt-2" />
 
       {modal ? (
         <div className="fixed inset-0 flex justify-center items-center transition-colors visible bg-black/70 z-50">

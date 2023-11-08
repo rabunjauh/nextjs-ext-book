@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast, ToastContainer } from "react-toastify";
@@ -11,7 +11,7 @@ type FormValues = {
   description: string;
 };
 
-export default function EditGroup(id) {
+export default function EditGroup(id: { id: number }) {
   const [modal, setModal] = useState(false);
   const router = useRouter();
 
@@ -44,7 +44,7 @@ export default function EditGroup(id) {
     },
   });
 
-  const submit = async (data) => {
+  const submit = async (data: FieldValues) => {
     try {
       const createGroups = await postGroup(data);
       toast.success(createGroups);
@@ -56,7 +56,7 @@ export default function EditGroup(id) {
     setModal(false);
   };
 
-  const postGroup = (data) => {
+  const postGroup = (data: FieldValues) => {
     return fetch(`http://localhost:3000/group/${id.id}`, {
       method: "PATCH",
       body: JSON.stringify(data),
