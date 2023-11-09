@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm, useFieldArray, FieldValues } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -80,7 +79,7 @@ export default function AddGroup() {
 
       {modal ? (
         <div className="fixed inset-0 flex justify-center items-center transition-colors visible bg-black/70 z-50">
-          <div className="bg-white p-5 rounded-lg w-4/12">
+          <div className="bg-white p-5 rounded-lg w-80">
             <h3 className="font-bold text-lg">Add New Group</h3>
             <div>
               <Button variant="outline" size="sm" onClick={() => append()}>
@@ -88,55 +87,53 @@ export default function AddGroup() {
               </Button>
             </div>
             <form onSubmit={handleSubmit(submit)}>
-              <ScrollArea className="h-[200px] w-96 rounded-md border p-4 my-2">
-                <table className="table-auto border-collapse border border-{#E5E7EB} w-full my-2 shadow-md">
-                  <thead>
-                    <tr>
-                      <th className="border border-{#E5E7EB} px-2">#</th>
-                      <th className="border border-{#E5E7EB} px-2">
-                        Group Description
-                      </th>
-                      <th className="border border-{#E5E7EB} px-2">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {fields.map((field, index) => {
-                      return (
-                        <tr key={field.id}>
-                          <td className="border border-{#E5E7EB} px-2">
-                            {index + 1}
-                          </td>
-                          <td className="border border-{#E5E7EB} p-2">
-                            <Input
-                              type="text"
-                              {...register(`group.${index}.description`, {
-                                required: true,
-                              })}
-                              className="w-full mb-2 mr-2"
-                            />
-                            <p>
-                              {errors.group?.[index]?.description && (
-                                <p>This can't be empty</p>
-                              )}
-                            </p>
-                          </td>
-                          <td className="border border-{#E5E7EB} px-2">
-                            {index > 0 ? (
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => remove(index)}
-                              >
-                                Remove
-                              </Button>
-                            ) : null}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </ScrollArea>
+              <table className="table-auto border-collapse border border-{#E5E7EB} w-full my-2 shadow-md">
+                <thead>
+                  <tr>
+                    <th className="border border-{#E5E7EB} px-2">#</th>
+                    <th className="border border-{#E5E7EB} px-2">
+                      Group Description
+                    </th>
+                    <th className="border border-{#E5E7EB} px-2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {fields.map((field, index) => {
+                    return (
+                      <tr key={field.id}>
+                        <td className="border border-{#E5E7EB} px-2">
+                          {index + 1}
+                        </td>
+                        <td className="border border-{#E5E7EB} p-2">
+                          <Input
+                            type="text"
+                            {...register(`group.${index}.description`, {
+                              required: true,
+                            })}
+                            className="w-full mb-2 mr-2"
+                          />
+                          <p>
+                            {errors.group?.[index]?.description && (
+                              <p>This can't be empty</p>
+                            )}
+                          </p>
+                        </td>
+                        <td className="border border-{#E5E7EB} px-2">
+                          {index > 0 ? (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => remove(index)}
+                            >
+                              Remove
+                            </Button>
+                          ) : null}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
 
               <div className="flex justify-between">
                 <Button variant="outline" size="sm" type="submit">
