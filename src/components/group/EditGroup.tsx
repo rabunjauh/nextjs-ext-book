@@ -75,6 +75,10 @@ export default function EditGroup(id: { id: number }) {
       });
   };
 
+  modal
+    ? (document.body.style.overflow = "hidden")
+    : (document.body.style.overflow = "auto");
+
   return (
     <div>
       <ToastContainer />
@@ -85,7 +89,7 @@ export default function EditGroup(id: { id: number }) {
 
       {modal ? (
         <div className="fixed inset-0 flex justify-center items-center transition-colors visible bg-black/70 z-50">
-          <div className="bg-white p-5 rounded-lg">
+          <div className="bg-white p-5 rounded-lg w-4/12">
             <h3 className="font-bold text-lg">Edit Group</h3>
             <form onSubmit={handleSubmit(submit)}>
               <div className="mb-2">
