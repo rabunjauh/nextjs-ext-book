@@ -93,7 +93,7 @@ export default function AddDepartment() {
 
       {modal ? (
         <div className="fixed inset-0 flex justify-center items-center transition-colors visible bg-black/70 z-50">
-          <div className="bg-white p-5 rounded-lg w-full">
+          <div className="bg-white p-5 rounded-lg w-full mx-5">
             <h3 className="font-bold text-lg">Add New Group</h3>
             <div>
               <Button variant="outline" size="sm" onClick={() => append()}>
@@ -137,13 +137,6 @@ export default function AddDepartment() {
                             </p>
                           </td>
                           <td className="border border-{#E5E7EB} p-2">
-                            {/* <Input
-                              type="text"
-                              {...register(`department.${index}.status`, {
-                                required: true,
-                              })}
-                              className="w-full mb-2 mr-2"
-                            /> */}
                             <select
                               {...register(`department.${index}.status`, {
                                 required: true,
@@ -174,13 +167,6 @@ export default function AddDepartment() {
                             </p>
                           </td>
                           <td className="border border-{#E5E7EB} p-2">
-                            {/* <Input
-                              type="text"
-                              {...register(`department.${index}.groupId`, {
-                                required: true,
-                              })}
-                              className="w-full mb-2 mr-2"
-                            /> */}
                             <select
                               {...register(`department.${index}.groupId`, {
                                 required: true,
