@@ -29,7 +29,7 @@ interface DataTableProps<TData, TValue> {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import DeleteGroup from "@/components/group/DeleteGroup";
+// import DeleteGroup from "@/components/group/DeleteGroup";
 
 export function DataTable<TData, TValue>({
   columns,
@@ -40,6 +40,7 @@ export function DataTable<TData, TValue>({
     []
   );
   const [rowSelection, setRowSelection] = React.useState({});
+  const [filtering, setFiltering] = React.useState("");
 
   const table = useReactTable({
     data,
@@ -53,7 +54,7 @@ export function DataTable<TData, TValue>({
     onRowSelectionChange: setRowSelection,
     state: {
       sorting,
-      columnFilters,
+      globalFilter: filtering,
       rowSelection,
     },
   });
@@ -62,13 +63,9 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter Description..."
-          value={
-            (table.getColumn("description")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("description")?.setFilterValue(event.target.value)
-          }
+          placeholder="Filter..."
+          value={filtering}
+          onChange={(event) => setFiltering(event.target.value)}
           className="max-w-sm"
         />
       </div>
@@ -180,9 +177,9 @@ export function DataTable<TData, TValue>({
           Last
         </Button>
       </div>
-      {table.getFilteredSelectedRowModel().rows.length > 0 ? (
+      {/* {table.getFilteredSelectedRowModel().rows.length > 0 ? (
         <DeleteGroup table={table} />
-      ) : null}
+      ) : null} */}
     </div>
   );
 }

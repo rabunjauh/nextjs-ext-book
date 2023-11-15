@@ -8,9 +8,6 @@ export default function Nav() {
       </div>
       <div className="flex justify-center md:block md:pt-4 pb-2">
         <div className="mx-3 text-[#d6d8d9] font-normal hover:font-bold">
-          <Link href={"/position"}>Position</Link>
-        </div>
-        <div className="mx-3 text-[#d6d8d9] font-normal hover:font-bold">
           <Link href={"/group"}>Group</Link>
         </div>
         <div className="mx-3 text-[#d6d8d9] font-normal hover:font-bold">

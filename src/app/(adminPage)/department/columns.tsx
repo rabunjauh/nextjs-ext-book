@@ -59,6 +59,9 @@ export const columns: ColumnDef<Department>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      return row.original.status ? "Active" : "Not Active";
+    },
   },
   {
     accessorKey: "order",
@@ -69,6 +72,20 @@ export const columns: ColumnDef<Department>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Order
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "group.description",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Group
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
