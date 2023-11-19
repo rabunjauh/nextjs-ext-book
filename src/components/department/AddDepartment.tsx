@@ -38,8 +38,6 @@ export default function AddDepartment() {
       .then((val) => setOrderOpt(val.data));
   }, []);
 
-  console.log(orderOpt);
-
   const toggle = () => {
     setModal(!modal);
     reset({
@@ -126,50 +124,59 @@ export default function AddDepartment() {
                             <Input
                               type="text"
                               {...register(`department.${index}.name`, {
-                                required: true,
+                                required: {
+                                  value: true,
+                                  message: "This field is required!",
+                                },
                               })}
                               className="w-full mb-2 mr-2"
                             />
-                            <p>
-                              {errors.department?.[index]?.name && (
-                                <p>This can't be empty</p>
-                              )}
+                            <p className="mt-1 text-xs text-red-600">
+                              {errors.department?.[index]?.name &&
+                                errors.department?.[index]?.name.message}
                             </p>
                           </td>
                           <td className="border border-{#E5E7EB} p-2">
                             <select
                               {...register(`department.${index}.status`, {
-                                required: true,
+                                required: {
+                                  value: true,
+                                  message: "This field is required!",
+                                },
                               })}
                             >
                               <option value="">Select...</option>
-                              <option value="1">Active</option>
-                              <option value="0">Not Active</option>
+                              <option value="Active">Active</option>
+                              <option value="Not Active">Not Active</option>
                             </select>
-                            <p>
-                              {errors.department?.[index]?.status && (
-                                <p>This can't be empty</p>
-                              )}
+                            <p className="mt-5 text-xs text-red-600">
+                              {errors.department?.[index]?.status &&
+                                errors.department?.[index]?.status.message}
                             </p>
                           </td>
                           <td className="border border-{#E5E7EB} p-2">
                             <Input
                               type="text"
                               {...register(`department.${index}.order`, {
-                                required: true,
+                                required: {
+                                  value: true,
+                                  message: "This field is required!",
+                                },
                               })}
                               className="w-full mb-2 mr-2"
                             />
-                            <p>
-                              {errors.department?.[index]?.order && (
-                                <p>This can't be empty</p>
-                              )}
+                            <p className="mt-1 text-xs text-red-600">
+                              {errors.department?.[index]?.name &&
+                                errors.department?.[index]?.name.message}
                             </p>
                           </td>
                           <td className="border border-{#E5E7EB} p-2">
                             <select
                               {...register(`department.${index}.groupId`, {
-                                required: true,
+                                required: {
+                                  value: true,
+                                  message: "This field is required!",
+                                },
                               })}
                             >
                               <option value="">Select...</option>
@@ -179,10 +186,9 @@ export default function AddDepartment() {
                                 </option>
                               ))}
                             </select>
-                            <p>
-                              {errors.department?.[index]?.groupId && (
-                                <p>This can't be empty</p>
-                              )}
+                            <p className="mt-5 text-xs text-red-600">
+                              {errors.department?.[index]?.name &&
+                                errors.department?.[index]?.name.message}
                             </p>
                           </td>
 

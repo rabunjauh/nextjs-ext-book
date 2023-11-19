@@ -22,7 +22,7 @@ export default async function GetDepartment() {
   const data = await getData();
   return (
     <div className="md:ml-60 px-10 bg-white">
-      <h1 className="text-5xl mb-10">Group</h1>
+      <h1 className="text-5xl mb-10">Department</h1>
       <AddDepartment />
       <DataTable columns={columns} data={data} />
     </div>

@@ -1,9 +1,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 export const RemoveMultiRow = ({ row, table }) => {
   const meta = table.options.meta;
-  const deleteRow = () => {
-    console.log(table);
-  };
+  const deleteRow = () => {};
   return (
     <Checkbox
       checked={row.getIsSelected()}

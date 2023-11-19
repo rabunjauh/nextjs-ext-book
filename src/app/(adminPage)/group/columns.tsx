@@ -50,7 +50,7 @@ export const columns: ColumnDef<Group>[] = [
     accessorKey: "action",
     header: "Action",
     cell: ({ row }) => {
-      return <EditGroup id={row.original.id} />;
+      return <EditGroup id={row.original.groupId} />;
     },
   },
 ];

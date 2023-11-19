@@ -4,14 +4,14 @@ import { Button } from "../ui/button";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function DeleteGroup({ table }) {
+export default function DeleteDepartment({ table }) {
   const router = useRouter();
   const [confirmModal, setConfirmModal] = useState(false);
 
   const executeDelete = async () => {
     try {
-      const destroyGroup = await removeGroup();
-      toast.success(destroyGroup);
+      const destroyDepartment = await removeDepartment();
+      toast.success(destroyDepartment);
     } catch (error) {
       console.log(error);
       toast.error("There is something wrong, delete data failed");
@@ -19,14 +19,14 @@ export default function DeleteGroup({ table }) {
     router.refresh();
   };
 
-  const removeGroup = () => {
+  const removeDepartment = () => {
     const selectedRows = table.getFilteredSelectedRowModel().rows;
     const deleteData: number[] = [];
 
-    selectedRows.map((row) => {
-      deleteData.push(row.original.id);
+    selectedRows.map((selectedRow) => {
+      deleteData.push(selectedRow.original.departmentId);
     });
-    return fetch("http://localhost:3000/multipleDeleteGroup", {
+    return fetch("http://localhost:3000/multipleDeleteDepartment", {
       method: "DELETE",
       body: JSON.stringify({
         id: deleteData,

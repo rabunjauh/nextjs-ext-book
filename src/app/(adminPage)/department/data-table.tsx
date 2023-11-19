@@ -29,7 +29,7 @@ interface DataTableProps<TData, TValue> {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-// import DeleteGroup from "@/components/group/DeleteGroup";
+import DeleteDepartment from "@/components/department/DeleteDepartment";
 
 export function DataTable<TData, TValue>({
   columns,
@@ -177,9 +177,9 @@ export function DataTable<TData, TValue>({
           Last
         </Button>
       </div>
-      {/* {table.getFilteredSelectedRowModel().rows.length > 0 ? (
-        <DeleteGroup table={table} />
-      ) : null} */}
+      {table.getFilteredSelectedRowModel().rows.length > 0 ? (
+        <DeleteDepartment table={table} />
+      ) : null}
     </div>
   );
 }

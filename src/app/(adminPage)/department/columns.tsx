@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import EditDepartment from "@/components/department/EditDepartment";
 
 export type Department = {
   name: string;
@@ -59,9 +60,6 @@ export const columns: ColumnDef<Department>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => {
-      return row.original.status ? "Active" : "Not Active";
-    },
   },
   {
     accessorKey: "order",
@@ -94,8 +92,8 @@ export const columns: ColumnDef<Department>[] = [
   {
     accessorKey: "action",
     header: "Action",
-    // cell: ({ row }) => {
-    //   return <EditGroup id={row.original.id} />;
-    // },
+    cell: ({ row }) => {
+      return <EditDepartment id={row.original.departmentId} />;
+    },
   },
 ];

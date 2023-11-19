@@ -23,8 +23,8 @@ export default function DeleteGroup({ table }) {
     const selectedRows = table.getFilteredSelectedRowModel().rows;
     const deleteData: number[] = [];
 
-    selectedRows.map((row) => {
-      deleteData.push(row.original.id);
+    selectedRows.map((selectedRow) => {
+      deleteData.push(selectedRow.original.groupId);
     });
     return fetch("http://localhost:3000/multipleDeleteGroup", {
       method: "DELETE",

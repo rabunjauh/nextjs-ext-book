@@ -114,14 +114,16 @@ export default function AddGroup() {
                             <Input
                               type="text"
                               {...register(`group.${index}.description`, {
-                                required: true,
+                                required: {
+                                  value: true,
+                                  message: "This field is required!",
+                                },
                               })}
                               className="w-full mb-2 mr-2"
                             />
-                            <p>
-                              {errors.group?.[index]?.description && (
-                                <p>This can't be empty</p>
-                              )}
+                            <p className="mt-1 text-xs text-red-600">
+                              {errors.group?.[index]?.description &&
+                                errors.group?.[index]?.description.message}
                             </p>
                           </td>
                           <td className="border border-{#E5E7EB} px-2">
