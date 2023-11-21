@@ -8,7 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function AddDepartment() {
+export default function AddPosition() {
   const [modal, setModal] = useState(false);
   const [orderOpt, setOrderOpt] = useState([]);
   const router = useRouter();
@@ -20,12 +20,12 @@ export default function AddDepartment() {
     control,
   } = useForm({
     defaultValues: {
-      department: [{ name: "", status: "", order: "", groupId: "" }],
+      position: [{ name: "", status: "", level: "", departmentId: "" }],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
-    name: "department",
+    name: "position",
     control,
     rules: {
       required: true,
@@ -33,7 +33,7 @@ export default function AddDepartment() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/group")
+    fetch("http://localhost:3000/department")
       .then((data) => data.json())
       .then((val) => setOrderOpt(val.data));
   }, []);
@@ -41,14 +41,14 @@ export default function AddDepartment() {
   const toggle = () => {
     setModal(!modal);
     reset({
-      department: [{ name: "", status: "", order: "", groupId: "" }],
+      position: [{ name: "", status: "", level: "", departmentId: "" }],
     });
   };
 
   const submit = async (data: FieldValues) => {
     try {
-      const createDepartments = await postDepartment(data);
-      toast.success(createDepartments);
+      const createPositions = await postPosition(data);
+      toast.success(createPositions);
     } catch (error) {
       console.log(error);
       toast.error("There is something wrong, added data failed");
@@ -57,10 +57,10 @@ export default function AddDepartment() {
     setModal(false);
   };
 
-  const postDepartment = (data: FieldValues) => {
-    return fetch("http://localhost:3000/department", {
+  const postPosition = (data: FieldValues) => {
+    return fetch("http://localhost:3000/position", {
       method: "POST",
-      body: JSON.stringify(data.department),
+      body: JSON.stringify(data.position),
       headers: {
         "Content-Type": "application/json",
       },
@@ -85,7 +85,7 @@ export default function AddDepartment() {
       <ToastContainer />
 
       <Button variant="outline" size="sm" onClick={toggle}>
-        Add Department
+        Add Position
       </Button>
       <hr className="mt-2" />
 
@@ -105,11 +105,13 @@ export default function AddDepartment() {
                     <tr>
                       <th className="border border-{#E5E7EB} px-2">#</th>
                       <th className="border border-{#E5E7EB} px-2">
-                        Department Name
+                        Position Name
                       </th>
                       <th className="border border-{#E5E7EB} px-2">Status</th>
-                      <th className="border border-{#E5E7EB} px-2">Order</th>
-                      <th className="border border-{#E5E7EB} px-2">Group</th>
+                      <th className="border border-{#E5E7EB} px-2">Level</th>
+                      <th className="border border-{#E5E7EB} px-2">
+                        Department
+                      </th>
                       <th className="border border-{#E5E7EB} px-2">Action</th>
                     </tr>
                   </thead>
@@ -123,7 +125,7 @@ export default function AddDepartment() {
                           <td className="border border-{#E5E7EB} p-2">
                             <Input
                               type="text"
-                              {...register(`department.${index}.name`, {
+                              {...register(`position.${index}.name`, {
                                 required: {
                                   value: true,
                                   message: "This field is required!",
@@ -132,13 +134,13 @@ export default function AddDepartment() {
                               className="w-full mb-2 mr-2"
                             />
                             <p className="mt-1 text-xs text-red-600">
-                              {errors.department?.[index]?.name &&
-                                errors.department?.[index]?.name.message}
+                              {errors.position?.[index]?.name &&
+                                errors.position?.[index]?.name.message}
                             </p>
                           </td>
                           <td className="border border-{#E5E7EB} p-2">
                             <select
-                              {...register(`department.${index}.status`, {
+                              {...register(`position.${index}.status`, {
                                 required: {
                                   value: true,
                                   message: "This field is required!",
@@ -150,14 +152,14 @@ export default function AddDepartment() {
                               <option value="Not Active">Not Active</option>
                             </select>
                             <p className="mt-5 text-xs text-red-600">
-                              {errors.department?.[index]?.status &&
-                                errors.department?.[index]?.status.message}
+                              {errors.position?.[index]?.status &&
+                                errors.position?.[index]?.status.message}
                             </p>
                           </td>
                           <td className="border border-{#E5E7EB} p-2">
                             <Input
                               type="text"
-                              {...register(`department.${index}.order`, {
+                              {...register(`position.${index}.level`, {
                                 required: {
                                   value: true,
                                   message: "This field is required!",
@@ -166,13 +168,13 @@ export default function AddDepartment() {
                               className="w-full mb-2 mr-2"
                             />
                             <p className="mt-1 text-xs text-red-600">
-                              {errors.department?.[index]?.order &&
-                                errors.department?.[index]?.order.message}
+                              {errors.position?.[index]?.level &&
+                                errors.position?.[index]?.level.message}
                             </p>
                           </td>
                           <td className="border border-{#E5E7EB} p-2">
                             <select
-                              {...register(`department.${index}.groupId`, {
+                              {...register(`position.${index}.departmentId`, {
                                 required: {
                                   value: true,
                                   message: "This field is required!",
@@ -181,14 +183,14 @@ export default function AddDepartment() {
                             >
                               <option value="">Select...</option>
                               {orderOpt.map((opt, i) => (
-                                <option key={i} value={opt.groupId}>
-                                  {opt.description}
+                                <option key={i} value={opt.departmentId}>
+                                  {opt.name}
                                 </option>
                               ))}
                             </select>
                             <p className="mt-5 text-xs text-red-600">
-                              {errors.department?.[index]?.groupId &&
-                                errors.department?.[index]?.groupId.message}
+                              {errors.position?.[index]?.departmentId &&
+                                errors.position?.[index]?.departmentId.message}
                             </p>
                           </td>
 

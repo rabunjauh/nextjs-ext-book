@@ -1,9 +1,9 @@
-import { Department, columns } from "./columns";
+import { Position, columns } from "./columns";
 import { DataTable } from "./data-table";
-import AddDepartment from "@/components/department/AddDepartment";
+import AddPosition from "@/components/position/AddPosition";
 
-async function getData(): Promise<Department[]> {
-  const res = await fetch("http://localhost:3000/department", {
+async function getData(): Promise<Position[]> {
+  const res = await fetch("http://localhost:3000/position", {
     cache: "no-store",
   });
 
@@ -12,9 +12,9 @@ async function getData(): Promise<Department[]> {
   } else {
     const resData = await res.json();
 
+    console.log(resData);
     // get array 'data' from resData
     const data = resData.data || [];
-    console.log(data);
     return data;
   }
 }
@@ -23,8 +23,8 @@ export default async function GetDepartment() {
   const data = await getData();
   return (
     <div className="md:ml-60 px-10 bg-white">
-      <h1 className="text-5xl mb-10">Department</h1>
-      <AddDepartment />
+      <h1 className="text-5xl mb-10">Position</h1>
+      <AddPosition />
       <DataTable columns={columns} data={data} />
     </div>
   );

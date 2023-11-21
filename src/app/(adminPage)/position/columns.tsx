@@ -4,16 +4,16 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import EditDepartment from "@/components/department/EditDepartment";
+import EditPosition from "@/components/position/EditPosition";
 
-export type Department = {
+export type Position = {
   name: string;
   status: string;
-  order: number;
-  groupId: number;
+  level: number;
+  departmentId: number;
 };
 
-export const columns: ColumnDef<Department>[] = [
+export const columns: ColumnDef<Position>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -62,28 +62,28 @@ export const columns: ColumnDef<Department>[] = [
     },
   },
   {
-    accessorKey: "order",
+    accessorKey: "level",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Order
+          Level
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "group.description",
+    accessorKey: "department.name",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Group
+          Department
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -93,7 +93,7 @@ export const columns: ColumnDef<Department>[] = [
     accessorKey: "action",
     header: "Action",
     cell: ({ row }) => {
-      return <EditDepartment id={row.original.departmentId} />;
+      return <EditPosition id={row.original.departmentId} />;
     },
   },
 ];

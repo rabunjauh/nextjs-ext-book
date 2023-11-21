@@ -13,6 +13,9 @@ export default function Nav() {
         <div className="mx-3 text-[#d6d8d9] font-normal hover:font-bold">
           <Link href={"/department"}>Department</Link>
         </div>
+        <div className="mx-3 text-[#d6d8d9] font-normal hover:font-bold">
+          <Link href={"/position"}>Position</Link>
+        </div>
       </div>
     </aside>
   );
